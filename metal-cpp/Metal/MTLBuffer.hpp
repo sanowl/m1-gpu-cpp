@@ -30,72 +30,80 @@
 
 namespace MTL
 {
-class Buffer : public NS::Referencing<Buffer, Resource>
-{
-public:
-    NS::UInteger   length() const;
+    class Buffer : public NS::Referencing<Buffer, Resource>
+    {
+    public:
+        // Get the length of the buffer
+        NS::UInteger length() const;
 
-    void*          contents();
+        // Get the contents of the buffer
+        void *contents();
 
-    void           didModifyRange(NS::Range range);
+        // Notify that a range of the buffer has been modified
+        void didModifyRange(NS::Range range);
 
-    class Texture* newTexture(const class TextureDescriptor* descriptor, NS::UInteger offset, NS::UInteger bytesPerRow);
+        // Create a new texture using a descriptor, offset, and bytes per row
+        class Texture *newTexture(const class TextureDescriptor *descriptor, NS::UInteger offset, NS::UInteger bytesPerRow);
 
-    void           addDebugMarker(const NS::String* marker, NS::Range range);
+        // Add a debug marker with a specified range
+        void addDebugMarker(const NS::String *marker, NS::Range range);
 
-    void           removeAllDebugMarkers();
+        // Remove all debug markers from the buffer
+        void removeAllDebugMarkers();
 
-    class Buffer*  remoteStorageBuffer() const;
+        // Get the remote storage buffer
+        class Buffer *remoteStorageBuffer() const;
 
-    class Buffer*  newRemoteBufferViewForDevice(const class Device* device);
-};
+        // Create a new remote buffer view for a specified device
+        class Buffer *newRemoteBufferViewForDevice(const class Device *device);
+    };
 
 }
 
-// property: length
+// Get the length of the buffer
 _MTL_INLINE NS::UInteger MTL::Buffer::length() const
 {
     return Object::sendMessage<NS::UInteger>(this, _MTL_PRIVATE_SEL(length));
 }
 
-// method: contents
-_MTL_INLINE void* MTL::Buffer::contents()
+// Get the contents of the buffer
+_MTL_INLINE void *MTL::Buffer::contents()
 {
-    return Object::sendMessage<void*>(this, _MTL_PRIVATE_SEL(contents));
+    return Object::sendMessage<void *>(this, _MTL_PRIVATE_SEL(contents));
 }
 
-// method: didModifyRange:
+// Notify that a range of the buffer has been modified
 _MTL_INLINE void MTL::Buffer::didModifyRange(NS::Range range)
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(didModifyRange_), range);
 }
 
-// method: newTextureWithDescriptor:offset:bytesPerRow:
-_MTL_INLINE MTL::Texture* MTL::Buffer::newTexture(const MTL::TextureDescriptor* descriptor, NS::UInteger offset, NS::UInteger bytesPerRow)
+// Create a new texture with a descriptor, offset, and bytes per row
+_MTL_INLINE MTL::Texture *MTL::Buffer::newTexture(const MTL::TextureDescriptor *descriptor, NS::UInteger offset, NS::UInteger bytesPerRow)
 {
-    return Object::sendMessage<MTL::Texture*>(this, _MTL_PRIVATE_SEL(newTextureWithDescriptor_offset_bytesPerRow_), descriptor, offset, bytesPerRow);
+    return Object::sendMessage<MTL::Texture *>(this, _MTL_PRIVATE_SEL(newTextureWithDescriptor_offset_bytesPerRow_), descriptor, offset, bytesPerRow);
 }
 
-// method: addDebugMarker:range:
-_MTL_INLINE void MTL::Buffer::addDebugMarker(const NS::String* marker, NS::Range range)
+// Add a debug marker with a specified range
+_MTL_INLINE void MTL::Buffer::addDebugMarker(const NS::String *marker, NS::Range range)
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(addDebugMarker_range_), marker, range);
 }
 
-// method: removeAllDebugMarkers
+// Remove all debug markers from the buffer
 _MTL_INLINE void MTL::Buffer::removeAllDebugMarkers()
 {
     Object::sendMessage<void>(this, _MTL_PRIVATE_SEL(removeAllDebugMarkers));
 }
 
-// property: remoteStorageBuffer
-_MTL_INLINE MTL::Buffer* MTL::Buffer::remoteStorageBuffer() const
+// Get the remote storage buffer
+_MTL_INLINE MTL::Buffer *MTL::Buffer::remoteStorageBuffer() const
 {
-    return Object::sendMessage<MTL::Buffer*>(this, _MTL_PRIVATE_SEL(remoteStorageBuffer));
+    return Object::sendMessage<MTL::Buffer *>(this, _MTL_PRIVATE_SEL(remoteStorageBuffer));
 }
 
-// method: newRemoteBufferViewForDevice:
-_MTL_INLINE MTL::Buffer* MTL::Buffer::newRemoteBufferViewForDevice(const MTL::Device* device)
+// Create a new remote buffer view for a specified device
+_MTL_INLINE MTL::Buffer *MTL::Buffer::newRemoteBufferViewForDevice(const MTL::Device *device)
 {
-    return Object::sendMessage<MTL::Buffer*>(this, _MTL_PRIVATE_SEL(newRemoteBufferViewForDevice_), device);
+    return Object::sendMessage<MTL::Buffer *>(this, _MTL_PRIVATE_SEL(newRemoteBufferViewForDevice_), device);
 }
